@@ -1,0 +1,30 @@
+.container{
+    width: 95%;
+    margin: auto;
+    padding: 40px;
+    background-color: #3f3f3f;
+    height: calc(95vh - 100px);
+}
+
+.items{
+
+
+}
+
+.item{ 
+    background-color: rgb(80, 34, 34);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    overflow: hidden;
+    position: relative;
+    max-height: 40px;
+}
+.itemContent{
+    display:flex;
+    justify-content: space-between;
+    
+}
+.itemDescription{
+    margin-top: 20px;
+}

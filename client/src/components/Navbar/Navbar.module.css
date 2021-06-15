@@ -1,0 +1,54 @@
+.container{
+    height: 50px;
+    background-color: #242323;
+    padding: 10px;
+}
+.content{
+    width: 80%;
+    line-height: 30px;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+}
+
+.leftNavBlock{
+
+}
+.rightNavBlock{
+    display: flex;
+}
+.userAvatar{
+    width: 30px;
+    border-radius: 50%;
+    height: 30px;
+}
+.burger{
+    margin-left: 30px;
+position: relative;
+}
+.burgerMenu{
+    position: absolute;
+    left: 0;
+    z-index: 200;
+    top: 40px;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.2s ease-in;
+}
+.burgerMenu li{
+    display: block;
+    background-color: #242323;
+    height: 50px;
+    cursor: pointer;
+    padding: 10px;
+    line-height: 30px;
+    transition: background-color 0.2s ease-in;
+
+
+}
+.burgerMenu li:hover{
+    background-color: #000000;
+}
+.burger:hover > .burgerMenu{
+    max-height: 200px;
+}

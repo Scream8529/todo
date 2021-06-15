@@ -1,0 +1,26 @@
+.checkBox{
+    opacity: 0;
+}
+.customCheckBox {
+    display: block;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: white 1px solid;
+}
+.checkBoxOn{
+    display: none;
+    
+}
+.checkBox:checked + .checkBoxOn{
+    display: block;
+    content: "";
+    width: 10px;
+    height: 20px;
+    position: absolute;
+    transform: rotateZ(33deg);
+    top: -5px;
+    left: 7px;
+    border-bottom: #00ff00 3px solid;
+    border-right: #00ff00 3px solid;
+}

@@ -1,0 +1,23 @@
+.container{
+
+}
+.content{
+
+}
+
+.tabsNavigation{
+    display: flex;
+    width: 95%;
+    margin: auto;
+    justify-content: space-around;
+}
+.tabsNavigation div{
+    width: 50%;
+    background-color: #3f3f3f;
+    text-align: center;
+    height: 50px;
+    vertical-align:middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
