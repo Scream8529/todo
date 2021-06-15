@@ -15,8 +15,8 @@ export default function Navbar() {
                     <div className={style.burger}>Burger
                         <div className={style.burgerMenu}>
                             <ul>
-                                <li><NavLink to="/login">Войти</NavLink></li>
-                                <li><NavLink to="/registration">Регистрация</NavLink></li>
+                            <NavLink to="/login"><li>Войти</li></NavLink>
+                            <NavLink to="/registration"><li>Регистрация</li></NavLink>
                             </ul>
                         </div>
                     </div>

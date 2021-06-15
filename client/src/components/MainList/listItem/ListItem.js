@@ -1,7 +1,7 @@
 import React from 'react'
 import style from "../Mainlist.module.css"
 import CheckBox from '../../otherComp/CheckBox/CheckBox'
-
+import Button from '../../otherComp/Button/Button'
 
 
 export default function ListItem() {
@@ -14,8 +14,8 @@ export default function ListItem() {
                     </div>
                     <div>Починить телевизор</div>
                     <div>
-                        <button>edit</button>
-                        <button>delete</button>
+                        <Button  name="Edit"/>
+                        <Button name="Delete"/>
                     </div>
 
                 </div>
