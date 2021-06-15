@@ -10,7 +10,7 @@ export default function Tabs() {
                     <h4>Мои дела</h4>
                 </div>
                 <div>
-                    <h4>Список</h4>
+                    <h4>Список покупок</h4>
                 </div>
             </div>
             <div className={style.content}>

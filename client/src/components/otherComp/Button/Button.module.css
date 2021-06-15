@@ -1,9 +1,16 @@
 .button{
-    padding: 0 10px;
+    padding: 3px;
     margin: 0;
-    border-radius: 0;
-    border: 1px solid blue;
-    background-color: springgreen;
-    color: steelblue;
+    margin: 0 5px;
+    border-radius: 50%;
+    border: 1px solid rgb(136, 136, 136);
+    background-color: white;
     cursor: pointer;
+}
+.button img{
+    text-align: center;
+    vertical-align: middle;
+    color: blanchedalmond;
+    max-height: 20px;
+    max-width: 20px;
 }

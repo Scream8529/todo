@@ -7,7 +7,7 @@ export default function Navbar() {
         <div className={style.container}>
             <div className={style.content}>
                 <div className={style.leftNavBlock}>
-                    Logo
+                    <NavLink to="/">Logo</NavLink>
                 </div>
 
                 <div className={style.rightNavBlock}>

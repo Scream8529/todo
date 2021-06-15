@@ -1,15 +1,26 @@
+
+:root{
+    --color:#383838;
+    --primary-color:#303241;
+    --secondary-color:#747570;
+    --addiction-color-1:#D6BD9F;
+    --addiction-color-2:#E0D9CE;
+    --addiction-color-3:#EEE4CA;
+}
+
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: white;
+    color: var(--addiction-color-3);
     
 }
 a{
     text-decoration: none;
-    color: white;
+    color: var(--addiction-color-3);
 }
 
 body{
-    background-color: #646464;
+    background-color: var(--color);
 }

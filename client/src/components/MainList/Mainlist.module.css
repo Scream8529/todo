@@ -12,19 +12,25 @@
 }
 
 .item{ 
-    background-color: rgb(80, 34, 34);
+    background-color: var(--addiction-color-1);
+    
     border-radius: 10px;
     margin-bottom: 20px;
     padding: 10px;
     overflow: hidden;
     position: relative;
-    max-height: 40px;
+    
 }
 .itemContent{
     display:flex;
     justify-content: space-between;
+    align-items: center;
     
 }
+.itemContent div{
+    color: var(--color);
+
+}
 .itemDescription{
-    margin-top: 20px;
+    display: none;
 }

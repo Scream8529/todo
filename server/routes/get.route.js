@@ -5,7 +5,8 @@ const authMiddleware = require('../middleware/auth.middleware')
 
 
 
-router.get('/', authMiddleware, getController.getAll)
+router.get('/work', authMiddleware, getController.getWork)
+router.get('/shopping', authMiddleware, getController.getShopping)
 router.post('/work', authMiddleware, getController.createWork)
 router.post('/shopping', authMiddleware, getController.createShopping)
 router.delete('/work', authMiddleware, getController.deleteWork)

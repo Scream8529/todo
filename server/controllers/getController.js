@@ -4,25 +4,41 @@ const User = require('../models/userModel')
 
 
 class Get {
-    async getAll(req,res){
+    async getWork(req,res){
         try{
             const user = await User.findById(req.user.id)
             let workList = [];
-            let shoppingList =[]
             if (user.sharedUsers){
                 for (let i = 0; i<user.sharedUsers; i++){
                     const k = await Work.find({user: user.sharedUsers[i]})
-                    const j = await Shopping.find({user: user.sharedUsers[i]})
                     workList = workList.concat(k)
-                    shoppingList = shoppingList.concat(j)
                 }
             }
         const workLists = await Work.find({user: req.user.id})
         workList = workList.concat(workLists)
+        
+            // NEED SORT
+        res.json({workList})
+    }
+        catch(e){
+            console.log(e)
+            res.status(500).json({message:"Ошибка запроса"})
+        }
+    }
+    async getShopping(req,res){
+        try{
+            const user = await User.findById(req.user.id)
+            let shoppingList =[]
+            if (user.sharedUsers){
+                for (let i = 0; i<user.sharedUsers; i++){
+                    const j = await Shopping.find({user: user.sharedUsers[i]})
+                    shoppingList = shoppingList.concat(j)
+                }
+            }
         const shoppingLists = await Shopping.find({user: req.user.id})
         shoppingList.concat(shoppingLists)
             // NEED SORT
-        res.json({workList, shoppingList})
+        res.json({shoppingList})
     }
         catch(e){
             console.log(e)

@@ -1,6 +1,6 @@
 .container{
     height: 50px;
-    background-color: #242323;
+    background-color: var(--primary-color);
     padding: 10px;
 }
 .content{
@@ -39,17 +39,15 @@
 }
 .burgerMenu li{
     display: block;
-    background-color: #242323;
+    background-color: var(--primary-color);
     height: 50px;
     cursor: pointer;
     padding: 10px;
     line-height: 30px;
     transition: background-color 0.2s ease-in;
-
-
 }
 .burgerMenu li:hover{
-    background-color: #000000;
+    background-color: var(--secondary-color);
 }
 .burger:hover > .burgerMenu{
     max-height: 200px;
