@@ -7,7 +7,7 @@ export default function Button(props) {
             <button className={style.button} onClick={props.onClick}>
                 {props.name}{
                     props.src &&
-                    <img src={props.src} />}
+                    <img alt="btn" src={props.src} />}
             </button>
         </>
     )

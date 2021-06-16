@@ -2,27 +2,27 @@
     width: 95%;
     margin: auto;
     padding: 40px;
-    background-color: #3f3f3f;
+    background-color: var(--secondary-color);
     height: calc(95vh - 100px);
 }
 
-.items{
-
-
-}
 
 .item{ 
     background-color: var(--addiction-color-1);
-    
     border-radius: 10px;
     margin-bottom: 20px;
     padding: 10px;
     overflow: hidden;
     position: relative;
+    cursor: pointer;
     
+}
+.item:hover{
+    background-color: var(--addiction-color-2);
 }
 .itemContent{
     display:flex;
+    padding: 0 30px;
     justify-content: space-between;
     align-items: center;
     
@@ -33,4 +33,20 @@
 }
 .itemDescription{
     display: none;
+}
+.addButton{
+    display: block;
+    border: none;
+    width: 100%;
+    background-color: var(--addiction-color-1);
+    color: var(--color);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    font-size: 18px;
+}
+.addButton:hover{
+    background-color: var(--addiction-color-2);
 }

@@ -1,8 +1,10 @@
 import React from 'react'
 import style from "./Navbar.module.css"
 import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 export default function Navbar() {
+    const isAuth = useSelector(state => state.auth.isAuth)
     return (
         <div className={style.container}>
             <div className={style.content}>
@@ -11,13 +13,20 @@ export default function Navbar() {
                 </div>
 
                 <div className={style.rightNavBlock}>
-                    <img src='https://image.shutterstock.com/image-photo/photo-on-asd-autism-spectrum-260nw-1951494031.jpg' className={style.userAvatar} />
+                    <img alt="userAvatar" src='https://image.shutterstock.com/image-photo/photo-on-asd-autism-spectrum-260nw-1951494031.jpg' className={style.userAvatar} />
                     <div className={style.burger}>Burger
                         <div className={style.burgerMenu}>
-                            <ul>
+                        {
+                            isAuth
+                            ?<ul>
+                            <NavLink to="/profile"><li>Профиль</li></NavLink>
+                            <li>Выйти</li>
+                            </ul>
+                            :<ul>
                             <NavLink to="/login"><li>Войти</li></NavLink>
                             <NavLink to="/registration"><li>Регистрация</li></NavLink>
                             </ul>
+                        }
                         </div>
                     </div>
                 </div>

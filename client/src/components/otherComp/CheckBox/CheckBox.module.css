@@ -1,6 +1,9 @@
 .checkBox{
     opacity: 0;
 }
+.checkBoxContainer{
+    cursor: pointer;
+}
 .customCheckBox {
     display: block;
     position: relative;
@@ -10,6 +13,7 @@
 }
 .checkBoxOn{
     display: none;
+ 
     
 }
 .checkBox:checked + .checkBoxOn{

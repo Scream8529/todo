@@ -1,0 +1,22 @@
+{
+  "name": "Todo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "npm run server --prefix server",
+    "client": "npm run start --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Scream8529/todo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Scream8529/todo/issues"
+  },
+  "homepage": "https://github.com/Scream8529/todo#readme"
+  
+}

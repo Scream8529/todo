@@ -6,7 +6,7 @@ export default function Tabs() {
     return (
         <div className={style.container}>
             <div className={style.tabsNavigation}>
-                <div>
+                <div style={{backgroundColor:"var(--secondary-color)"}}>
                     <h4>Мои дела</h4>
                 </div>
                 <div>

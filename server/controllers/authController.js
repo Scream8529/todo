@@ -40,6 +40,7 @@ class AuthController {
                 token, 
                 user:{
                     id: user._id,
+                    login:user.login,
                     name: user.name,
                     avatar: user.avatar,
                     shared: user.sharedUser
@@ -50,6 +51,26 @@ class AuthController {
             console.log(error)
         }
 
+    }
+    async auth (req,res) {
+        try {
+            if (!req.user.id){
+                return res.status(400).json({message:'Ошибка идентефикации'})
+
+            }
+            const user = await User.findOne({_id: req.user.id})
+            if (!user) {
+                return res.status(400).json({message:'Такой пользователь не найден'})
+            }
+            return res.status(200).json({
+                id: user._id,
+                name: user.name,
+                avatar: user.avatar,
+                shared: user.sharedUser
+            })
+        } catch (error) {
+            console.log(error)
+        }
     }
     
 }

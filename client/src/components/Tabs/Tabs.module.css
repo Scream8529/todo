@@ -13,11 +13,19 @@
 }
 .tabsNavigation div{
     width: 50%;
-    background-color: #3f3f3f;
+    cursor: pointer;
+    background-color: var(--color);
     text-align: center;
     height: 50px;
     vertical-align:middle;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.tabsNavigation div:hover{
+    background-color: var(--addiction-color-2);
+    color: var(--color);
+}
+.tabsNavigation div:hover >h4{
+    color: var(--color);
 }

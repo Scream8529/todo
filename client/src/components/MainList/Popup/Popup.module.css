@@ -1,0 +1,43 @@
+.container{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #4242428e;
+}
+
+.popup{
+width: 85vw;
+height: 85vh;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%,-50%);
+
+background-color: blanchedalmond;
+border-radius: 4px;
+padding: 10px;
+}
+.buttons{
+    display: flex;
+    flex-wrap: nowrap;
+    color: var(--color);
+}
+
+.popupHeader{
+    display: flex;
+    padding: 0 20px;
+    justify-content: space-between;
+}
+.popupHeader h2{
+    color: var(--color);
+}
+.popupContent{
+    padding: 20px 30px;
+    color: var(--color);
+    
+}
+.popupContent p{
+    color: var(--color);
+}
