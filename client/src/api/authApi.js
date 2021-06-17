@@ -1,14 +1,16 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
+
+
 const instance = axios.create({
     baseURL: 'http://127.0.0.1:8080/api/v1/',
-    header:{
-        Authorization: Cookies.get("token")
+    headers:{
+        Authorization: `Bearer ${Cookies.get("token")}`
     }
   });
 
- let authApi = {
+ export let authApi = {
       auth (){
           return instance.get('auth')
           .then(response=>{
@@ -23,6 +25,18 @@ const instance = axios.create({
           })
       }
   }
+  export let listApi ={
+    getList (type){
+        return instance.get(`content?type=${type}`)
+        .then(res=>{
+            return res.data
+        })
+    },
+    getOneItem (id, type){
+        return instance.get(`content/item?type=${type}&id=${id}`)
+        .then(res=>{
+            return res.data
+        })
+    }
+}
 
-
-  export default authApi

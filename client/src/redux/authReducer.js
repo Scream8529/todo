@@ -1,4 +1,4 @@
-import authApi from '../api/authApi'
+import {authApi} from '../api/authApi'
 
 const TOGGLE_IS_AUTH = 'TOGGLE_IS_AUTH'
 const TOGGLE_IS_INIT = 'TOGGLE_IS_INIT'
