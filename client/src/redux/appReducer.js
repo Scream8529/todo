@@ -1,4 +1,4 @@
-import { listApi } from "../api/authApi"
+import { authApi, listApi } from "../api/authApi"
 
 const GET_LIST = 'GET_LIST'
 const TOGGLE_ITEMS_LIST = 'TOGGLE_ITEMS_LIST'
@@ -66,17 +66,26 @@ export const getCurrentItemTC = (id, type) => {
             })
     }
 }
+export const addItemAC = (name,description, type) => {
+    return dispatch => {
+        listApi.addItem(name,description, type)
+            .then(res=>{
+                dispatch(toggleIsCreatePopup(false))
+                dispatch(getListTC(type))
+            })
+    }
+}
 
 
 export const toggleItemsListTC = (type = 1) => {
     return dispatch => {
-        //toggleIsFetching(true)
+        dispatch(toggleIsFetching(true))
         dispatch(toggleItemsListAC(type))
         listApi.getList(type)
             .then(res => {
 
                 dispatch(getList(res.list))
-                //toggleIsFetching(false)
+                dispatch(toggleIsFetching(false))
             })
     }
 }
@@ -84,6 +93,7 @@ export const toggleItemsListTC = (type = 1) => {
 
 export const getListTC = (type = 1) => {
     return dispatch => {
+
         listApi.getList(type)
             .then(res => {
 

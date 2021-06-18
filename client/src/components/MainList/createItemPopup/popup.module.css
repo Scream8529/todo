@@ -26,6 +26,7 @@
 }
 .createBtn{
     width: 100%;
+    cursor: pointer;
     height: 30px;
     background-color: var(--addiction-color-1);
     border-radius: 5px;

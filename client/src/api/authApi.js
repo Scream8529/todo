@@ -3,6 +3,7 @@ import Cookies from 'js-cookie'
 
 
 
+
 const instance = axios.create({
     baseURL: 'http://127.0.0.1:8080/api/v1/',
     headers:{
@@ -34,6 +35,12 @@ const instance = axios.create({
     },
     getOneItem (id, type){
         return instance.get(`content/item?type=${type}&id=${id}`)
+        .then(res=>{
+            return res.data
+        })
+    },
+    addItem(name, description, type){
+        return instance.post(`content`, {name, description, type})
         .then(res=>{
             return res.data
         })

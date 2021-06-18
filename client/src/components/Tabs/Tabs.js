@@ -8,10 +8,8 @@ export default function Tabs() {
     const dispatch = useDispatch()
     const listType = useSelector(state => state.app.listType)
     const toggleItemLists=(type)=>{
-        console.log(type)
         dispatch(toggleItemsListTC(type))
     }
-
     const list = useSelector(state => state.app.list)
     useEffect(()=>{
        dispatch(getListTC())

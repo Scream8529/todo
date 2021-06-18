@@ -2,6 +2,7 @@ const {Schema, model, ObjectId} = require('mongoose')
 
 const Shopping = new Schema({
     name:{type:String, required: true},
+    description:{type:String},
     date:{type:Date, default:Date.now()},
     user:{type:ObjectId, ref:'User'},
     urgently:{type:Boolean, default:false},

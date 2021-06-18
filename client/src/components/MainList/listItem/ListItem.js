@@ -13,7 +13,7 @@ export default function ListItem(props) {
     }
     return (
         <div>
-            <div className={style.item} >
+            <div className={style.item}>
                 <div className={style.itemContent} onClick={()=>{openPopup()}}>
                     <div onClick={(e)=>{e.stopPropagation()}}>
                         <CheckBox checked={props.done}/>
