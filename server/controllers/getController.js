@@ -156,7 +156,7 @@ class Get {
                 res.status(500).json({ message: "Не верный тип" })
             }
             if (!item) {
-                return res.status(404).json({ message: "Не найдено" })
+                return res.status(404).json({ message: "Не найдено item" })
             }
 
             if (name) {
@@ -171,6 +171,7 @@ class Get {
             if (done) {
                 item.done = done
             }
+            console.log(item)
             item.save()
             return res.status(200).json(item)
         }

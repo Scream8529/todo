@@ -63,6 +63,14 @@ const instance = axios.create({
         .then(res=>{
             return res.data
         })
+    },
+    doneItem (id, type){
+        return instance.post(`content/item`, {type, id, done:true}, {headers:{
+            Authorization: a()
+        }})
+        .then(res=>{
+            return res.data
+        })
     }
 }
 

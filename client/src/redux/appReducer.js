@@ -14,7 +14,7 @@ const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
 const TOGGLE_CURRENT_NAME = 'TOGGLE_CURRENT_NAME'
 const TOGGLE_CURRENT_DESCRIPTION = 'TOGGLE_CURRENT_DESCRIPTION'
-
+const DONE_ITEM = 'DONE_ITEM'
 
 const initialState = {
     listType: 1,
@@ -43,6 +43,13 @@ const appReducer = (state = initialState, action) => {
             return { ...state, isFetching: action.payload }
         case TOGGLE_IS_EDITING:
             return { ...state, isEditing: action.payload }
+            case DONE_ITEM:
+                return {...state, list:[...state.list.map(l=>{
+                    if (l._id === action.payload){
+                        return {...l, done:true}
+                    }
+                    return l
+                })]}
         case TOGGLE_CURRENT_NAME:
             return { ...state, currentItem: { ...state.currentItem, name: action.payload } }
         case TOGGLE_CURRENT_DESCRIPTION:
@@ -58,6 +65,8 @@ const appReducer = (state = initialState, action) => {
     }
 }
 
+
+export const doneItemAC = (payload)=>({type:DONE_ITEM, payload})
 export const defaultSettingAC = () =>({type:DEFAULT_SETTING})
 export const toggleCurrentNameAC = (payload) => ({ type: TOGGLE_CURRENT_NAME, payload })
 export const toggleCurrentDescriptionAC = (payload) => ({ type: TOGGLE_CURRENT_DESCRIPTION, payload })
@@ -71,6 +80,16 @@ export const getCurrentItemAC = (payload) => ({ type: GET_CURRENT_ITEM, payload 
 export const clearCurrentItemAC = () => ({ type: CLEAR_CURRENT_ITEM })
 export const toggleItemsListAC = (payload) => ({ type: TOGGLE_ITEMS_LIST, payload })
 
+
+
+export const doneItemTC = (id, type)=>{
+    return dispatch =>{
+        listApi.doneItem(id, type)
+        .then(res=>{
+            dispatch(doneItemAC(res.id))
+        })
+    }
+}
 export const deleteItemTC = (id, type) => {
     return dispatch => {
         listApi.deleteItem(id, type)

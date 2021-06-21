@@ -9,7 +9,7 @@ router.get('/', authMiddleware, getController.getItems)
 router.get('/item', authMiddleware, getController.getOneItem)
 router.post('/', authMiddleware, getController.createItem)
 router.delete('/', authMiddleware, getController.deleteItem)
-router.put('/', authMiddleware, getController.changeItem)
+router.post('/item', authMiddleware, getController.changeItem)
 
 
 

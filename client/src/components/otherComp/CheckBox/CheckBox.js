@@ -5,7 +5,13 @@ export default function CheckBox(props) {
     return (
         <div className={style.checkBoxContainer}>
             <label className={style.customCheckBox}>
-                <input type="checkbox" className={style.checkBox} />
+                <input 
+                disabled={props.done}
+                value={props.done} 
+                onClick={props.onChange}
+                // onChange={props.onChange} 
+                type="checkbox" 
+                className={style.checkBox} />
                 <div className={style.checkBoxOn}></div>
             </label>
         </div>

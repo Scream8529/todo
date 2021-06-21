@@ -2,7 +2,7 @@ import React from 'react'
 import style from "../Mainlist.module.css"
 import CheckBox from '../../otherComp/CheckBox/CheckBox'
 import { useDispatch, useSelector } from 'react-redux'
-import {getCurrentItemTC} from '../../../redux/appReducer'
+import {doneItemTC, getCurrentItemTC} from '../../../redux/appReducer'
 
 
 export default function ListItem(props) {
@@ -11,12 +11,16 @@ export default function ListItem(props) {
     const openPopup = () => { 
         dispatch(getCurrentItemTC(props.id, listType))
     }
+    const doneItem=()=>{
+        console.log(props.id)
+        dispatch(doneItemTC(props.id, listType))
+    }
     return (
         <div>
             <div className={style.item}>
                 <div className={style.itemContent} onClick={()=>{openPopup()}}>
                     <div onClick={(e)=>{e.stopPropagation()}}>
-                        <CheckBox checked={props.done}/>
+                        <CheckBox checked={props.done} onChange={()=>{doneItem()}}/>
                     </div>
                     <div>{props.name}</div>
                     <div></div>
