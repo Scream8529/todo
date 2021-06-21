@@ -1,5 +1,6 @@
 import React from 'react'
 import style from '../Login/LogReg.module.css'
+import {NavLink} from 'react-router-dom'
 
 export default function Registration() {
     return (
@@ -8,6 +9,7 @@ export default function Registration() {
                 <div className={style.header}>
                     <h2>Регистрация</h2>
                 </div>
+                <form onSubmit={(e)=>{e.preventDefault()}}>
                 <div>
                     <input className={style.input} placeholder="Введите логин"/>
                 </div>
@@ -15,9 +17,10 @@ export default function Registration() {
                     <input className={style.input} placeholder="Введите пароль"/>
                 </div>
                 <div className={style.logBtn}>
-                    <button className={style.button}>Есть аккаунт?</button>
+                    <NavLink to="login" className={style.button}>Есть аккаунт?</NavLink>
                     <button className={style.button}>Зарегистрировать</button>
                 </div>
+                </form>
             </div>
         </div>
     )

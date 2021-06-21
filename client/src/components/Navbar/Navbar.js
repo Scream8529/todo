@@ -1,10 +1,18 @@
 import React from 'react'
 import style from "./Navbar.module.css"
 import { NavLink } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import {logoutTC} from '../../redux/authReducer'
 
 export default function Navbar() {
+    const dispatch = useDispatch()
     const isAuth = useSelector(state => state.auth.isAuth)
+
+    function logout (){
+        dispatch(logoutTC())
+    }
+
+
     return (
         <div className={style.container}>
             <div className={style.content}>
@@ -20,7 +28,7 @@ export default function Navbar() {
                             isAuth
                             ?<ul>
                             <NavLink to="/profile"><li>Профиль</li></NavLink>
-                            <li>Выйти</li>
+                            <li onClick={()=>{logout()}}>Выйти</li>
                             </ul>
                             :<ul>
                             <NavLink to="/login"><li>Войти</li></NavLink>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch,useSelector } from 'react-redux'
 import { loginTC } from '../../redux/authReducer'
+import {NavLink} from 'react-router-dom'
 
 import style from './LogReg.module.css'
 
@@ -9,10 +10,12 @@ export default function Login() {
 
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
-    
+    const state = useSelector(state=>state.auth)
 
     const sendData = () => {
+        
         dispatch(loginTC(login, password))
+        console.log(state)
     }
 
     return (
@@ -21,6 +24,7 @@ export default function Login() {
                 <div className={style.header}>
                     <h2>Войти</h2>
                 </div>
+                <form onSubmit={(e)=>{e.preventDefault()}}>
                 <div>
                     <input 
                     onChange={(e)=>{setLogin(e.target.value)}}
@@ -36,11 +40,12 @@ export default function Login() {
                     placeholder="Введите пароль"/>
                 </div>
                 <div className={style.logBtn}>
-                    <button className={style.button}>Нет акаунта?</button>
+                    <NavLink to="/registration" className={style.button}>Нет акаунта?</NavLink>
                     <button onClick={()=>{
                         sendData();
                     }} className={style.button}>Войти</button>
                 </div>
+                </form>
             </div>
         </div>
     )

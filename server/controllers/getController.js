@@ -98,7 +98,6 @@ class Get {
             if (!type === '1' && type === '2') {
                 res.status(500).json({ message: "Не верный тип" })
             }
-            console.log(item)
             item.save()
             return res.status(200).json(item)
         } catch (error) {
@@ -108,18 +107,17 @@ class Get {
     }
     async deleteItem(req, res) {
         try {
-            const type = String(req.body.type)
+            const type = String(req.query.type)
             let item;
-
-            if (!req.body.id) {
+            if (!req.query.id) {
                 return res.status(400).json({ message: "Не найдено" })
 
             }
             if (type === "1") {
-                item = await Work.findOne({ _id: req.body.id })
+                item = await Work.findOne({ _id: req.query.id })
             }
             if (type === '2'){
-                item = await Shopping.findOne({ _id: req.body.id })
+                item = await Shopping.findOne({ _id: req.query.id })
             }
             if (!type === '1' && type === '2') {
                 res.status(500).json({ message: "Не верный тип" })
@@ -127,9 +125,8 @@ class Get {
             if (!item) {
                 return res.status(404).json({ message: "Не найдено" })
             }
-
             item.remove();
-            return res.status(200).json({ message: "Удаление прошло успешно" })
+            return res.status(200).json({ status:0, message: "Удаление прошло успешно" })
 
 
         } catch (error) {

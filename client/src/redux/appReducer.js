@@ -1,4 +1,4 @@
-import { authApi, listApi } from "../api/authApi"
+import {  listApi } from "../api/authApi"
 
 const GET_LIST = 'GET_LIST'
 const TOGGLE_ITEMS_LIST = 'TOGGLE_ITEMS_LIST'
@@ -8,10 +8,13 @@ const DELETE_ITEM = 'DELETE_ITEM'
 const CHANGE_ITEM = 'CHANGE_ITEM'
 const TOGGLE_LIST = 'TOGGLE_LIST'
 
+const TOGGLE_IS_EDITING = 'TOGGLE_IS_EDITING'
 const TOGGLE_IS_INFO_POPUP = 'TOGGLE_IS_INFO_POPUP'
 const TOGGLE_IS_CREATE_POPUP = 'TOGGLE_IS_CREATE_POPUP'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
+const TOGGLE_CURRENT_NAME = 'TOGGLE_CURRENT_NAME'
+const TOGGLE_CURRENT_DESCRIPTION = 'TOGGLE_CURRENT_DESCRIPTION'
 
 
 const initialState = {
@@ -20,7 +23,8 @@ const initialState = {
     list: [],
     currentItem: {},
     isInfoPopup: false,
-    isCreatePopup: false
+    isCreatePopup: false,
+    isEditing:false
 }
 
 
@@ -38,6 +42,14 @@ const appReducer = (state = initialState, action) => {
             return { ...state, currentItem: action.payload }
             case TOGGLE_IS_FETCHING:
                 return {...state, isFetching:action.payload}
+                case TOGGLE_IS_EDITING:
+                    return {...state, isEditing:action.payload}
+                    case TOGGLE_CURRENT_NAME:
+                    return {...state, currentItem:{...state.currentItem, name:action.payload}}
+                    case TOGGLE_CURRENT_DESCRIPTION:
+                    return {...state, currentItem:{...state.currentItem, description:action.payload}}
+                case DELETE_ITEM:
+                    return {...state, list:[...state.list.filter(l=>l._id !== action.payload)]}
         case CLEAR_CURRENT_ITEM:
             return { ...state, currentItem: {} }
         default:
@@ -46,6 +58,10 @@ const appReducer = (state = initialState, action) => {
 }
 
 
+export const toggleCurrentNameAC = (payload) => ({ type: TOGGLE_CURRENT_NAME, payload })
+export const toggleCurrentDescriptionAC = (payload) => ({ type: TOGGLE_CURRENT_DESCRIPTION, payload })
+export const toggleIsEditing = (payload) => ({ type: TOGGLE_IS_EDITING, payload })
+export const deleteItemAC = (payload) => ({ type: DELETE_ITEM, payload })
 export const toggleIsInfoPopup = (payload) => ({ type: TOGGLE_IS_INFO_POPUP, payload })
 export const toggleIsFetching = (payload) => ({ type: TOGGLE_IS_FETCHING, payload })
 export const toggleIsCreatePopup = (payload) => ({ type: TOGGLE_IS_CREATE_POPUP, payload })
@@ -53,6 +69,20 @@ export const getList = (payload) => ({ type: GET_LIST, payload })
 export const getCurrentItemAC = (payload) => ({ type: GET_CURRENT_ITEM, payload })
 export const clearCurrentItemAC = () => ({ type: CLEAR_CURRENT_ITEM })
 export const toggleItemsListAC = (payload) => ({ type: TOGGLE_ITEMS_LIST, payload })
+
+export const deleteItemTC=(id, type)=>{
+        return dispatch =>{
+            listApi.deleteItem(id, type)
+                .then(res=>{
+                    if (res.status === 0){
+                    dispatch(deleteItemAC(id))
+                    dispatch(toggleIsInfoPopup(false))}
+                    else alert("Deleting error")
+                })
+        }
+}
+
+
 
 export const getCurrentItemTC = (id, type) => {
     return dispatch => {
@@ -75,8 +105,6 @@ export const addItemAC = (name,description, type) => {
             })
     }
 }
-
-
 export const toggleItemsListTC = (type = 1) => {
     return dispatch => {
         dispatch(toggleIsFetching(true))
@@ -89,14 +117,10 @@ export const toggleItemsListTC = (type = 1) => {
             })
     }
 }
-
-
 export const getListTC = (type = 1) => {
     return dispatch => {
-
         listApi.getList(type)
             .then(res => {
-
                 dispatch(getList(res.list))
             })
     }

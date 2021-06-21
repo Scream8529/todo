@@ -7,7 +7,7 @@ import Cookies from 'js-cookie'
 const instance = axios.create({
     baseURL: 'http://127.0.0.1:8080/api/v1/',
     headers:{
-        Authorization: `Bearer ${Cookies.get("token")}`
+        Authorization: `Bearer ${Cookies.get('token')}`
     }
   });
 
@@ -24,7 +24,10 @@ const instance = axios.create({
               Cookies.set('token', res.data.token)
               return res.data
           })
-      }
+      },
+      logout(){
+            Cookies.remove('token')
+    }
   }
   export let listApi ={
     getList (type){
@@ -41,6 +44,12 @@ const instance = axios.create({
     },
     addItem(name, description, type){
         return instance.post(`content`, {name, description, type})
+        .then(res=>{
+            return res.data
+        })
+    },
+    deleteItem (id, type){
+        return instance.delete(`content?id=${id}&type=${type}`)
         .then(res=>{
             return res.data
         })

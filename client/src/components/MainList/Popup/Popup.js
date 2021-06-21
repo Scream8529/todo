@@ -3,18 +3,27 @@ import style from './Popup.module.css'
 import Button from '../../otherComp/Button/Button'
 import gear from '../../../assets/imgs/gear.png'
 import trash from '../../../assets/imgs/trash.png'
-import { useDispatch, useSelector } from 'react-redux'
-import { toggleIsInfoPopup } from '../../../redux/appReducer'
+import {  useSelector, useDispatch } from 'react-redux'
+import Input from '../../otherComp/Input/Input'
+import {toggleCurrentNameAC, toggleCurrentDescriptionAC} from '../../../redux/appReducer'
+
 import Loader from '../../otherComp/Loader/Loader'
 
 
 export default function Popup(props) {
     const dispatch = useDispatch()
-    function closePopup() {
-        dispatch(toggleIsInfoPopup(false))
-    }
+    
     const currentItem = useSelector(state => state.app.currentItem)
     const isFetching = useSelector(state => state.app.isFetching)
+    const isEditing = useSelector(state => state.app.isEditing)
+    const toggleName = (f) =>{
+        dispatch(toggleCurrentNameAC(f))
+    }
+    const toggleDescription = (e) =>{
+        dispatch(toggleCurrentDescriptionAC(e))
+    }
+
+
 
     return (
         <div className={style.container}>
@@ -25,19 +34,40 @@ export default function Popup(props) {
 
                     : <div>
                         <div className={style.popupHeader}>
-                            <h2>{currentItem.name}</h2>
+                            <h2>
+                            {!isEditing
+                                ?currentItem.name
+                                :<Input 
+                                placeholder="Имя"
+                                onChange={toggleName}
+                                value={currentItem.name}/>
+                                }
+                            </h2>
                             <div className={style.buttons}>
-                                <Button src={gear} onClick={props.toggleSetting} />
+                                <Button src={gear} onClick={()=>{props.toggleSetting(true)}} />
                                 <Button src={trash} onClick={props.toggleDelete} />
-                                <Button name="X" onClick={() => { closePopup() }} />
+                                <Button name="X" onClick={() => { props.closePopup() }} />
                             </div>
 
 
                         </div>
                         <div className={style.popupContent}>
-                            <p>
-                                {currentItem.description}
-                            </p>
+                            
+                            {!isEditing
+                                ?currentItem.description
+                                :<Input 
+                                placeholder="Описание"
+                                onChange={toggleDescription}
+                                value={currentItem.description}/>
+                                }
+                            
+                        </div>
+                        <div>{isEditing &&
+                        <button 
+                        className={style.input}
+                        >
+                            Изменить
+                        </button>}
                         </div>
                     </div>
                 }

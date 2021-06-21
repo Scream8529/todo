@@ -8,10 +8,6 @@ const GET_USER = 'GET_USER'
 
 const initialState = {
     currentUser: {
-        id:'',
-        login:'',
-        name:'',
-        avatar:''
     },
     isAuth:false,
     isInit:false
@@ -35,24 +31,33 @@ export const toggleIsInitAC =(payload)=>({type:TOGGLE_IS_INIT, payload})
 export const getUserAC =(payload)=>({type:GET_USER, payload})
 
 export const initializationTC = () => {
-    return dispatch =>{
-           authApi.auth()
+    return  dispatch =>{
+            authApi.auth()
            .then(response=>{
                dispatch(getUserAC(response))
                dispatch(toggleIsAuthAC(true))
            })
-           dispatch(toggleIsInitAC(true))    
+           dispatch(toggleIsInitAC(true))
+    }
+}
+export const logoutTC = () =>{
+    return dispatch =>{
+        authApi.logout()
+        dispatch(toggleIsAuthAC(false))
     }
 }
 export const loginTC = (login, password) =>{
-    return dispatch =>{
+    return async dispatch =>{
         authApi.login(login, password)
-        .then(res=>{
-            dispatch(getUserAC(res))
+        .then(res =>{
+            dispatch(getUserAC(res.user))
             dispatch(toggleIsAuthAC(true))
+            console.log(res.user)
         })
+        
+            
+        }
     }
-}
 export const registrationTC = () =>{
     return dispatch =>{
 
