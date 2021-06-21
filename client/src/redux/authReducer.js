@@ -1,4 +1,5 @@
 import {authApi} from '../api/authApi'
+import { defaultSettingAC } from './appReducer'
 
 const TOGGLE_IS_AUTH = 'TOGGLE_IS_AUTH'
 const TOGGLE_IS_INIT = 'TOGGLE_IS_INIT'
@@ -44,6 +45,7 @@ export const logoutTC = () =>{
     return dispatch =>{
         authApi.logout()
         dispatch(toggleIsAuthAC(false))
+        dispatch(defaultSettingAC())
     }
 }
 export const loginTC = (login, password) =>{
@@ -54,8 +56,6 @@ export const loginTC = (login, password) =>{
             dispatch(toggleIsAuthAC(true))
             console.log(res.user)
         })
-        
-            
         }
     }
 export const registrationTC = () =>{

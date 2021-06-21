@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch,useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { loginTC } from '../../redux/authReducer'
 import {NavLink} from 'react-router-dom'
 
@@ -10,12 +10,9 @@ export default function Login() {
 
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
-    const state = useSelector(state=>state.auth)
 
-    const sendData = () => {
-        
+    const sendData = () => {  
         dispatch(loginTC(login, password))
-        console.log(state)
     }
 
     return (

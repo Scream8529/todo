@@ -1,12 +1,11 @@
-import {  listApi } from "../api/authApi"
+import { listApi } from "../api/authApi"
 
 const GET_LIST = 'GET_LIST'
 const TOGGLE_ITEMS_LIST = 'TOGGLE_ITEMS_LIST'
 const GET_CURRENT_ITEM = 'GET_CURRENT_ITEM'
 const CLEAR_CURRENT_ITEM = 'CLEAR_CURRENT_ITEM'
 const DELETE_ITEM = 'DELETE_ITEM'
-const CHANGE_ITEM = 'CHANGE_ITEM'
-const TOGGLE_LIST = 'TOGGLE_LIST'
+const DEFAULT_SETTING= 'DEFAULT_SETTING'
 
 const TOGGLE_IS_EDITING = 'TOGGLE_IS_EDITING'
 const TOGGLE_IS_INFO_POPUP = 'TOGGLE_IS_INFO_POPUP'
@@ -24,7 +23,7 @@ const initialState = {
     currentItem: {},
     isInfoPopup: false,
     isCreatePopup: false,
-    isEditing:false
+    isEditing: false
 }
 
 
@@ -40,16 +39,18 @@ const appReducer = (state = initialState, action) => {
             return { ...state, isCreatePopup: action.payload }
         case GET_CURRENT_ITEM:
             return { ...state, currentItem: action.payload }
-            case TOGGLE_IS_FETCHING:
-                return {...state, isFetching:action.payload}
-                case TOGGLE_IS_EDITING:
-                    return {...state, isEditing:action.payload}
-                    case TOGGLE_CURRENT_NAME:
-                    return {...state, currentItem:{...state.currentItem, name:action.payload}}
-                    case TOGGLE_CURRENT_DESCRIPTION:
-                    return {...state, currentItem:{...state.currentItem, description:action.payload}}
-                case DELETE_ITEM:
-                    return {...state, list:[...state.list.filter(l=>l._id !== action.payload)]}
+        case TOGGLE_IS_FETCHING:
+            return { ...state, isFetching: action.payload }
+        case TOGGLE_IS_EDITING:
+            return { ...state, isEditing: action.payload }
+        case TOGGLE_CURRENT_NAME:
+            return { ...state, currentItem: { ...state.currentItem, name: action.payload } }
+        case TOGGLE_CURRENT_DESCRIPTION:
+            return { ...state, currentItem: { ...state.currentItem, description: action.payload } }
+        case DELETE_ITEM:
+            return { ...state, list: [...state.list.filter(l => l._id !== action.payload)] }
+        case DEFAULT_SETTING:
+            return {...initialState}
         case CLEAR_CURRENT_ITEM:
             return { ...state, currentItem: {} }
         default:
@@ -57,7 +58,7 @@ const appReducer = (state = initialState, action) => {
     }
 }
 
-
+export const defaultSettingAC = () =>({type:DEFAULT_SETTING})
 export const toggleCurrentNameAC = (payload) => ({ type: TOGGLE_CURRENT_NAME, payload })
 export const toggleCurrentDescriptionAC = (payload) => ({ type: TOGGLE_CURRENT_DESCRIPTION, payload })
 export const toggleIsEditing = (payload) => ({ type: TOGGLE_IS_EDITING, payload })
@@ -70,16 +71,17 @@ export const getCurrentItemAC = (payload) => ({ type: GET_CURRENT_ITEM, payload 
 export const clearCurrentItemAC = () => ({ type: CLEAR_CURRENT_ITEM })
 export const toggleItemsListAC = (payload) => ({ type: TOGGLE_ITEMS_LIST, payload })
 
-export const deleteItemTC=(id, type)=>{
-        return dispatch =>{
-            listApi.deleteItem(id, type)
-                .then(res=>{
-                    if (res.status === 0){
+export const deleteItemTC = (id, type) => {
+    return dispatch => {
+        listApi.deleteItem(id, type)
+            .then(res => {
+                if (res.status === 0) {
                     dispatch(deleteItemAC(id))
-                    dispatch(toggleIsInfoPopup(false))}
-                    else alert("Deleting error")
-                })
-        }
+                    dispatch(toggleIsInfoPopup(false))
+                }
+                else alert("Deleting error")
+            })
+    }
 }
 
 
@@ -96,10 +98,10 @@ export const getCurrentItemTC = (id, type) => {
             })
     }
 }
-export const addItemAC = (name,description, type) => {
+export const addItemAC = (name, description, type) => {
     return dispatch => {
-        listApi.addItem(name,description, type)
-            .then(res=>{
+        listApi.addItem(name, description, type)
+            .then(res => {
                 dispatch(toggleIsCreatePopup(false))
                 dispatch(getListTC(type))
             })
