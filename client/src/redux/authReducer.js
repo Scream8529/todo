@@ -54,13 +54,15 @@ export const loginTC = (login, password) =>{
         .then(res =>{
             dispatch(getUserAC(res.user))
             dispatch(toggleIsAuthAC(true))
-            console.log(res.user)
         })
         }
     }
-export const registrationTC = () =>{
+export const registrationTC = (login, password) =>{
     return dispatch =>{
-
+        authApi.registration(login, password)
+        .then(res=>{
+            alert("Регистрация прошла успешно!")
+        })
     }
 }
 

@@ -171,7 +171,6 @@ class Get {
             if (done) {
                 item.done = done
             }
-            console.log(item)
             item.save()
             return res.status(200).json(item)
         }

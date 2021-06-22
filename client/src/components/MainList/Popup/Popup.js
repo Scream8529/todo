@@ -5,7 +5,7 @@ import gear from '../../../assets/imgs/gear.png'
 import trash from '../../../assets/imgs/trash.png'
 import {  useSelector, useDispatch } from 'react-redux'
 import Input from '../../otherComp/Input/Input'
-import {toggleCurrentNameAC, toggleCurrentDescriptionAC} from '../../../redux/appReducer'
+import {toggleCurrentNameAC, toggleCurrentDescriptionAC,changeItemTC} from '../../../redux/appReducer'
 
 import Loader from '../../otherComp/Loader/Loader'
 
@@ -16,13 +16,17 @@ export default function Popup(props) {
     const currentItem = useSelector(state => state.app.currentItem)
     const isFetching = useSelector(state => state.app.isFetching)
     const isEditing = useSelector(state => state.app.isEditing)
+    const type = useSelector(state => state.app.listType)
     const toggleName = (f) =>{
         dispatch(toggleCurrentNameAC(f))
     }
     const toggleDescription = (e) =>{
         dispatch(toggleCurrentDescriptionAC(e))
     }
-
+    const changeItem = () =>{
+        const {_id, name, description} = currentItem
+        dispatch(changeItemTC(_id, type, name, description))
+    }
 
 
     return (
@@ -64,6 +68,7 @@ export default function Popup(props) {
                         </div>
                         <div>{isEditing &&
                         <button 
+                        onClick={()=>{changeItem()}}
                         className={style.input}
                         >
                             Изменить

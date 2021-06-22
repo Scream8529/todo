@@ -12,6 +12,7 @@ const TOGGLE_IS_INFO_POPUP = 'TOGGLE_IS_INFO_POPUP'
 const TOGGLE_IS_CREATE_POPUP = 'TOGGLE_IS_CREATE_POPUP'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
+const CHANGE_ITEM = 'CHANGE_ITEM'
 const TOGGLE_CURRENT_NAME = 'TOGGLE_CURRENT_NAME'
 const TOGGLE_CURRENT_DESCRIPTION = 'TOGGLE_CURRENT_DESCRIPTION'
 const DONE_ITEM = 'DONE_ITEM'
@@ -50,6 +51,13 @@ const appReducer = (state = initialState, action) => {
                     }
                     return l
                 })]}
+        case CHANGE_ITEM:
+            return {...state, list:[...state.list.map(l=>{
+                if (l._id === action.id){
+                    return {...l, name: action.name, description: action.description}
+                }
+                return l
+            })]}        
         case TOGGLE_CURRENT_NAME:
             return { ...state, currentItem: { ...state.currentItem, name: action.payload } }
         case TOGGLE_CURRENT_DESCRIPTION:
@@ -67,6 +75,7 @@ const appReducer = (state = initialState, action) => {
 
 
 export const doneItemAC = (payload)=>({type:DONE_ITEM, payload})
+export const changeItemAC = (id, name,  description)=>({type:CHANGE_ITEM, id, name, description})
 export const defaultSettingAC = () =>({type:DEFAULT_SETTING})
 export const toggleCurrentNameAC = (payload) => ({ type: TOGGLE_CURRENT_NAME, payload })
 export const toggleCurrentDescriptionAC = (payload) => ({ type: TOGGLE_CURRENT_DESCRIPTION, payload })
@@ -80,13 +89,21 @@ export const getCurrentItemAC = (payload) => ({ type: GET_CURRENT_ITEM, payload 
 export const clearCurrentItemAC = () => ({ type: CLEAR_CURRENT_ITEM })
 export const toggleItemsListAC = (payload) => ({ type: TOGGLE_ITEMS_LIST, payload })
 
-
-
+export const changeItemTC = (id, type, name, description) =>{
+    return dispatch => {
+        listApi.changeItem(id, type, name, description)
+        .then(res=>{
+            dispatch(changeItemAC(res._id, res.name, res.description))
+            // dispatch(toggleIsInfoPopup(false))
+            dispatch(toggleIsEditing(false))
+        })
+    }
+}
 export const doneItemTC = (id, type)=>{
     return dispatch =>{
         listApi.doneItem(id, type)
         .then(res=>{
-            dispatch(doneItemAC(res.id))
+            dispatch(doneItemAC(res._id))
         })
     }
 }

@@ -27,6 +27,12 @@ const instance = axios.create({
               return res.data
           })
       },
+      registration(login, password){
+        return instance.post('auth/registration', {login, password})
+        .then(res=>{
+            return res.data
+        })
+    },
       logout(){
             Cookies.remove('token')
     }
@@ -66,6 +72,14 @@ const instance = axios.create({
     },
     doneItem (id, type){
         return instance.post(`content/item`, {type, id, done:true}, {headers:{
+            Authorization: a()
+        }})
+        .then(res=>{
+            return res.data
+        })
+    },
+    changeItem (id, type, name, description){
+        return instance.post(`content/item`, { id, type,  name, description}, {headers:{
             Authorization: a()
         }})
         .then(res=>{

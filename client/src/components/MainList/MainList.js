@@ -16,7 +16,7 @@ export default function MainList(props) {
     id={l._id}
     key={l._id}
     name={l.name}
-    checked={l.done}
+    done={l.done}
    />)
    function toggleDelete (){
     dispatch(deleteItemTC(currentItem._id, listType))

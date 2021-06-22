@@ -12,7 +12,6 @@ export default function ListItem(props) {
         dispatch(getCurrentItemTC(props.id, listType))
     }
     const doneItem=()=>{
-        console.log(props.id)
         dispatch(doneItemTC(props.id, listType))
     }
     return (
@@ -20,7 +19,7 @@ export default function ListItem(props) {
             <div className={style.item}>
                 <div className={style.itemContent} onClick={()=>{openPopup()}}>
                     <div onClick={(e)=>{e.stopPropagation()}}>
-                        <CheckBox checked={props.done} onChange={()=>{doneItem()}}/>
+                        <CheckBox done={props.done} doneItem={()=>{doneItem()}}/>
                     </div>
                     <div>{props.name}</div>
                     <div></div>

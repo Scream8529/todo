@@ -27,7 +27,7 @@ export default function Navbar() {
                         {
                             isAuth
                             ?<ul>
-                            <NavLink to="/profile"><li>Профиль</li></NavLink>
+                            {/* <NavLink to="/profile"><li>Профиль</li></NavLink> */}
                             <li onClick={()=>{logout()}}>Выйти</li>
                             </ul>
                             :<ul>

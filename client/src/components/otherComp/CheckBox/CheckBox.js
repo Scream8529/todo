@@ -7,8 +7,8 @@ export default function CheckBox(props) {
             <label className={style.customCheckBox}>
                 <input 
                 disabled={props.done}
-                value={props.done} 
-                onClick={props.onChange}
+                defaultChecked={props.done} 
+                onClick={props.doneItem}
                 // onChange={props.onChange} 
                 type="checkbox" 
                 className={style.checkBox} />
